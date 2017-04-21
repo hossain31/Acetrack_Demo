@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">Acetrack_Demo</string>
+    <string name="action_settings">Settings</string>
+    <string name="increase">increase</string>
+    <string name="decrease">decrease</string>
+    <string name="ready">Blås när du är redo...</string>
+    <string name="start">Starta test</string>
+    <string name="restart">Starta om test</string>
+    <string name="analyze">Vänta analyserar...</string>
+    <string name="result">Till Resultat</string>
+    <string name="value">Värde...</string>
+    <string name="finish">Uppvärmd... Redo att köra</string>
+    <string name="heating">Device uppvärmning pågår</string>
+    <string name="error">Misslyckat, försök igen...</string>
+    <string name="result_text">Klar, ditt resultat är...</string>
+    <string name="till_analys">Till Analys</string>
+    <string name="vid_fel">Vid Fel</string>
+    <string name="batteri">Batteri: 0%</string>
+    <string name="countdown"></string>
+
+    <!--for BLE code-->
+    <string name="title_activity_device_scan">Acetrack device explorar</string>
+    <string name="ble_not_supported">BLE is not supported</string>
+    <string name="label_data">Data:</string>
+    <string name="label_device_address">Device address:</string>
+    <string name="label_state">State:</string>
+    <string name="label_rssi">RSSI:</string>
+
+    <string name="no_data">No data</string>
+    <string name="connected">Connected</string>
+    <string name="disconnected">Disconnected</string>
+    <string name="error_bluetooth_not_supported">Bluetooth not supported.</string>
+
+    <string name="unknown_device">Unknown device</string>
+    <string name="unknown_characteristic">Unknown characteristic</string>
+    <string name="unknown_service">Unknown service</string>
+
+    <!-- Menu items -->
+    <string name="menu_hot_keys_throughput">Throughput Hot Keys</string>
+    <string name="menu_connect">Connect</string>
+    <string name="menu_disconnect">Disconnect</string>
+    <string name="menu_scan">Scan</string>
+    <string name="menu_stop">Stop</string>
+    <string name="title_activity_device_control">Device Control</string>
+    <string name="title_activity_scan_result">ScanResult</string>
+
+    <string name="title_activity_characteristic_read_write">CharacteristicReadWrite</string>
+    <string name="title_activity_characteristic_uart">Uart</string>
+    <string name="title_activity_characteristic_read_write_select_dialog">
+        CharacteristicReadWriteSelectDialog</string>
+    <string name="starta_test">Starta Test</string>
+    <string name="warming">Uppvärmning pågår...</string>
+    <string name="errorButton">Starta om igen</string>
+    <!--for BLE code END-->
+
+</resources>
