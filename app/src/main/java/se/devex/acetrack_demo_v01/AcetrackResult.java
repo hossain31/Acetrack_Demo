@@ -121,10 +121,11 @@ public class AcetrackResult  extends AppCompatActivity {
                 if (acetonResult == "") {
                     mRxData.setText("");
                 }else {
-                    mRxData.setText(acetonResult);
+                    mRxData.setText(acetonResult + " ppm");
                 }
             }
 
+            /*
             //check if there is more token available
             if(st.hasMoreTokens()) {
                 String resultStatus = st.nextToken();
@@ -141,6 +142,7 @@ public class AcetrackResult  extends AppCompatActivity {
                     }
                 }
             }
+            */
         }
     }
 

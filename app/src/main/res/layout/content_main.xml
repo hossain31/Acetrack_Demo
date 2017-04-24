@@ -16,14 +16,13 @@
     android:background="@drawable/background">
 
     <Button
+        android:id="@+id/searchAcetrack"
+        style="@android:style/Widget.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/button1"
-        android:text=""
-        android:onClick="SearchingAcetrack"
-        android:background="@drawable/app_start"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="43dp"
         android:layout_centerHorizontal="true"
-        style="@android:style/Widget.Button" />
+        android:layout_marginBottom="43dp"
+        android:background="@drawable/app_start"
+        android:text="" />
 </RelativeLayout>
