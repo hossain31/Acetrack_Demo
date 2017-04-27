@@ -116,33 +116,17 @@ public class AcetrackResult  extends AppCompatActivity {
             Log.d(TAG, "***Aceton_result = " + acetonResult);
 
             //display aceton value
-            String stateResult = "RESULT";
-            if(stateChange.equals(stateResult)) {
+            String stateResult1 = "RESULT";
+            String stateResult2 = "ESULT";
+            if((stateChange.equals(stateResult1)) || (stateChange.equals(stateResult2))) {
                 if (acetonResult == "") {
-                    mRxData.setText("");
+                    mRxData.setText("Något gick fel!");
                 }else {
                     mRxData.setText(acetonResult + " ppm");
                 }
+            }else {
+                mRxData.setText("Något gick fel!");
             }
-
-            /*
-            //check if there is more token available
-            if(st.hasMoreTokens()) {
-                String resultStatus = st.nextToken();
-                Log.d(TAG, "resultStatus = " + resultStatus);
-                //remove non-digit char from the string
-                final String resultOutput = stripNonDigits(resultStatus);
-                Log.d(TAG, "***Aceton_resultOutput = " + resultOutput);
-                //display the final result if 1=Ok/0=Fail
-                if(stateChange.equals(stateResult)) {
-                    if(resultOutput.equals("1")) {
-                        rXResultStatus.setText("Ok, bra jobbat :)");
-                    }else {
-                        rXResultStatus.setText("Fel, försök igen :(");
-                    }
-                }
-            }
-            */
         }
     }
 
@@ -162,7 +146,7 @@ public class AcetrackResult  extends AppCompatActivity {
 
             }
             else if (BluetoothLeService.ACTION_GATT_DISCONNECTED.equals(action)) {
-                // put some code here
+                //start new activity
                 intent = new Intent(AcetrackResult.this, AcetrackError.class);
                 startActivity(intent);
                 finish(); //close the activity
