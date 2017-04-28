@@ -118,7 +118,8 @@ public class AcetrackResult  extends AppCompatActivity {
             //display aceton value
             String stateResult1 = "RESULT";
             String stateResult2 = "ESULT";
-            if((stateChange.equals(stateResult1)) || (stateChange.equals(stateResult2))) {
+            String stateResult3 = "SULT";
+            if((stateChange.equals(stateResult1)) || (stateChange.equals(stateResult2)) || (stateChange.equals(stateResult3))) {
                 if (acetonResult == "") {
                     mRxData.setText("Något gick fel!");
                 }else {
