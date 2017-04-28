@@ -100,6 +100,14 @@ public class AcetrackAnalyzing extends AppCompatActivity {
     }
 
 
+    //Press the mobile's back button to close the app!
+    @Override
+    public void onBackPressed() {
+        //finishAndRemoveTask (); //for API:21=+
+        this.finishAffinity(); //for API:16 to 20
+    }
+
+
     //Receive data_stream from the device and take care of it
     String strCollect="";
     private void displayRxData(byte[] data) {

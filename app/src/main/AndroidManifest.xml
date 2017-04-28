@@ -43,51 +43,31 @@
         <activity android:name=".AcetrackReadyIdle"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+            >
         </activity>
 
         <activity android:name=".AcetrackReadyAndWait"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:parentActivityName=".AcetrackReadyIdle">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AcetrackReadyIdle" />
+            >
         </activity>
 
         <activity android:name=".AcetrackError"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+            >
         </activity>
 
         <activity android:name=".AcetrackAnalyzing"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:parentActivityName=".AcetrackReadyIdle">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AcetrackReadyIdle" />
+            >
         </activity>
 
         <activity android:name=".AcetrackResult"
             android:label="@string/app_name"
             android:screenOrientation="portrait"
-            android:parentActivityName=".AcetrackReadyIdle">
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".AcetrackReadyIdle" />
+            >
         </activity>
 
         <service

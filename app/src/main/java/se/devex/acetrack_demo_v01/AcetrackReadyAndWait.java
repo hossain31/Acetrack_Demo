@@ -98,6 +98,14 @@ public class AcetrackReadyAndWait extends AppCompatActivity {
     }
 
 
+    //Press the mobile's back button to close the app!
+    @Override
+    public void onBackPressed() {
+        //finishAndRemoveTask (); //for API:21=+
+        this.finishAffinity(); //for API:16 to 20
+    }
+
+
     //Remove all non-digits value from the string
     public static String stripNonDigits(final CharSequence input){
         final StringBuilder sb = new StringBuilder(input.length());

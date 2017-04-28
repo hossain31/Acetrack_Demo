@@ -160,6 +160,14 @@ public class DeviceScanActivity extends ListActivity {
         mLeDeviceListAdapter.clear();
     }
 
+
+    //Press the mobile's back button to close the app!
+    @Override
+    public void onBackPressed() {
+        //finishAndRemoveTask (); //for API:21=+
+        this.finishAffinity(); //for API:16 to 20
+    }
+
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         Log.d(TAG, String.format("*** onListItemClick() position %d",position));
@@ -173,13 +181,14 @@ public class DeviceScanActivity extends ListActivity {
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
             mScanning = false;
         }
-
+        /*
         BluetoothLeService.IsDualMode = (scanDevice[position].Type == BluetoothDevice.DEVICE_TYPE_DUAL) ? true : false; //Select Single or Dual Mode
         if (BluetoothLeService.IsDualMode) {
             Toast.makeText(getApplication(), "Dual Mode", Toast.LENGTH_LONG).show();
         }
+        */
         final Intent intent = new Intent(DeviceScanActivity.this, DeviceControlActivity.class);
-        //final Intent intent = new Intent(DeviceScanActivity.this, AcetrackReadyIdle.class);
+
         intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, mBluetoothDevice.getName());
         intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, mBluetoothDevice.getAddress());
         startActivity(intent);
