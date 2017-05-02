@@ -43,7 +43,7 @@ public class DeviceScanActivity extends ListActivity {
         public int Type,BondState;
         public byte[] scanRecord;
     }
-    private final static int MaxDeviceCount = 500; //Support Max 500 Bluetooth devices
+    private final static int MaxDeviceCount = 50; //Support Max 500 Bluetooth devices
     private LeDeviceListAdapter mLeDeviceListAdapter;
     private BluetoothAdapter mBluetoothAdapter;
     private BluetoothDevice mBluetoothDevice;
@@ -55,7 +55,7 @@ public class DeviceScanActivity extends ListActivity {
     private static final long SCAN_PERIOD = 5000;
 
     //SYHO START
-    private deviceInfo[] scanDevice=new deviceInfo[MaxDeviceCount];
+    private deviceInfo[] scanDevice = new deviceInfo[MaxDeviceCount];
     private Integer scanIndex=0;
     //SYHO END
 
@@ -82,7 +82,6 @@ public class DeviceScanActivity extends ListActivity {
         if (mBluetoothAdapter == null) {
             Toast.makeText(this, R.string.error_bluetooth_not_supported, Toast.LENGTH_SHORT).show();
             finish();
-            return;
         }
     }
 
@@ -98,7 +97,7 @@ public class DeviceScanActivity extends ListActivity {
             menu.findItem(R.id.menu_stop).setVisible(true);
             menu.findItem(R.id.menu_scan).setVisible(false);
             menu.findItem(R.id.menu_refresh).setActionView(
-            R.layout.actionbar_indeterminate_progress);
+                    R.layout.actionbar_indeterminate_progress);
         }
         return true;
     }
@@ -137,7 +136,6 @@ public class DeviceScanActivity extends ListActivity {
         mLeDeviceListAdapter = new LeDeviceListAdapter();
         setListAdapter(mLeDeviceListAdapter);
         Log.d(TAG, "LeDeviceListAdapter Created");
-
         scanLeDevice(true);
     }
 
@@ -160,14 +158,6 @@ public class DeviceScanActivity extends ListActivity {
         mLeDeviceListAdapter.clear();
     }
 
-
-    //Press the mobile's back button to close the app!
-    @Override
-    public void onBackPressed() {
-        //finishAndRemoveTask (); //for API:21=+
-        this.finishAffinity(); //for API:16 to 20
-    }
-
     @Override
     protected void onListItemClick(ListView l, View v, int position, long id) {
         Log.d(TAG, String.format("*** onListItemClick() position %d",position));
@@ -181,12 +171,7 @@ public class DeviceScanActivity extends ListActivity {
             mBluetoothAdapter.stopLeScan(mLeScanCallback);
             mScanning = false;
         }
-        /*
-        BluetoothLeService.IsDualMode = (scanDevice[position].Type == BluetoothDevice.DEVICE_TYPE_DUAL) ? true : false; //Select Single or Dual Mode
-        if (BluetoothLeService.IsDualMode) {
-            Toast.makeText(getApplication(), "Dual Mode", Toast.LENGTH_LONG).show();
-        }
-        */
+
         final Intent intent = new Intent(DeviceScanActivity.this, DeviceControlActivity.class);
 
         intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, mBluetoothDevice.getName());
@@ -196,6 +181,7 @@ public class DeviceScanActivity extends ListActivity {
 
     private void scanLeDevice(final boolean enable) {
         Log.d(TAG, "*** scanLeDevice()");
+
         if (enable) {
             // Stops scanning after a pre-defined scan period.
             mHandler.postDelayed(new Runnable() {
@@ -327,6 +313,12 @@ public class DeviceScanActivity extends ListActivity {
                     Log.d(TAG,  String.format("*** BluetoothAdapter.LeScanCallback.onLeScan(): *RSSI=%d",rssi));
 
                     final String deviceName = device.getName();
+                    if(deviceName==null){
+                        return;
+                    }
+                    if(!deviceName.startsWith("BLE SPP")) {
+                        return;
+                    }
                     scanDevice[scanIndex]= new deviceInfo();
                     if (deviceName != null && deviceName.length() > 0) {
                         scanDevice[scanIndex].Name = deviceName;
@@ -334,6 +326,7 @@ public class DeviceScanActivity extends ListActivity {
                         scanDevice[scanIndex].Name = "unknown device";
                     }
                     scanDevice[scanIndex].Address = device.getAddress();
+
                     scanDevice[scanIndex].RSSI = rssi;
                     scanDevice[scanIndex].Type = device.getType();
                     scanDevice[scanIndex].BondState = device.getBondState();
@@ -348,6 +341,7 @@ public class DeviceScanActivity extends ListActivity {
                     Log.d(TAG, String.format("*** Scan Index=%d, Name=%s, Address=%s, RSSI=%d, scan result length=%d",
                             scanIndex, scanDevice[scanIndex].Name,scanDevice[scanIndex].Address,scanDevice[scanIndex].RSSI, packetLength ));
                     scanIndex++;
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -366,4 +360,5 @@ public class DeviceScanActivity extends ListActivity {
         TextView deviceType;
         TextView deviceBoundState;
     }
+
 }
