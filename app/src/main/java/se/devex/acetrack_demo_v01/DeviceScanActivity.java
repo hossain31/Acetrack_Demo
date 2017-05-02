@@ -5,6 +5,7 @@ import android.app.ListActivity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
+import android.bluetooth.le.BluetoothLeScanner;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -46,6 +47,7 @@ public class DeviceScanActivity extends ListActivity {
     private final static int MaxDeviceCount = 50; //Support Max 500 Bluetooth devices
     private LeDeviceListAdapter mLeDeviceListAdapter;
     private BluetoothAdapter mBluetoothAdapter;
+    private BluetoothLeScanner mBluetoothLeScanner;
     private BluetoothDevice mBluetoothDevice;
     private boolean mScanning;
     private Handler mHandler;
@@ -73,10 +75,13 @@ public class DeviceScanActivity extends ListActivity {
             finish();
         }
 
-        // Initializes a Bluetooth adapter.  For API level 18 and above, get a reference to
+        // Initializes a Bluetooth adapter. For API level 18 and above, get a reference to
         // BluetoothAdapter through BluetoothManager.
+        getBluetoothAdapterAndLeScanner();
+        /* this code moved into the getBluetoothAdapterAndLeScanner()
         final BluetoothManager bluetoothManager =  (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
+        */
 
         // Checks if Bluetooth is supported on the device.
         if (mBluetoothAdapter == null) {
@@ -147,6 +152,16 @@ public class DeviceScanActivity extends ListActivity {
             finish();
             return;
         }
+
+        getBluetoothAdapterAndLeScanner();
+
+        // Checks if Bluetooth is supported on the device.
+        if (mBluetoothAdapter == null) {
+            Toast.makeText(this, "bluetoothManager.getAdapter()==null", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
+
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -178,6 +193,18 @@ public class DeviceScanActivity extends ListActivity {
         intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, mBluetoothDevice.getAddress());
         startActivity(intent);
     }
+
+
+    private void getBluetoothAdapterAndLeScanner(){
+        // get BluetoothAdapter and BluetoothLeScanner.
+        final BluetoothManager bluetoothManager =
+                (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        mBluetoothAdapter = bluetoothManager.getAdapter();
+        mBluetoothLeScanner = mBluetoothAdapter.getBluetoothLeScanner();
+
+        mScanning = false;
+    }
+
 
     private void scanLeDevice(final boolean enable) {
         Log.d(TAG, "*** scanLeDevice()");
